@@ -32,12 +32,11 @@ function reset_form()
  * File Uploading Function 
  */
 
-function move(array $files, $path = "media/")
+function move(array $files, string $path = "media/")
 {
     // file manage 
     $tmp_name = $files['tmp_name'];
     $file_name = $files['name'];
-
 
     // get file extension  
     $file_arr = explode('.', $file_name);

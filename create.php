@@ -35,23 +35,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $gender = $_POST['gender'] ?? '';
 
     //uplode deves photos
-
     $deves_photo = null;
-    if (isset($_FILES['user_photo']['name'])) {
+    if (isset($_FILES['photo']['name'])) {
         $deves_photo = move(
             [
+                "tmp_name" => $_FILES['photo']['tmp_name'],
                 "name" => $_FILES['photo']['name'],
-                "tmp_name" => $_FILES['photo']['tmp_name']
             ],
-            "./media/deves/"
+            "media/deves/"
         );
     }
     //form valadation
-    if (empty($name)) {
+    if (empty($name) || empty($email) || empty($phone) || empty($skill) || empty($location) || empty($age) || empty($gender)) {
         $msg = createAlert('All Fields Are Requerd');
     } else {
-
-        $sql = "INSERT INTO deves (name, email, phone, skill, location, age, gender, photo) VALUES (:name, :email, :phone, :skill, :location, :age, :gender, :photo)";
+        $sql = "INSERT INTO deves (name, email, phone, skill, location, age, gender, photo ) VALUES (:name, :email, :phone, :skill, :location, :age, :gender, :photo)";
         $statement = connect()->prepare($sql);
         $statement->bindParam(':name', $name);
         $statement->bindParam(':email', $email);
@@ -63,9 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         $statement->bindParam(':photo', $deves_photo);
         $statement->execute();
 
-        $msg = createAlert('Data Submited', 'success');
+        header('location:index.php');
     }
 }
+
+
 
 ?>
 
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             <?php echo $msg ?? '' ?>
                         </div>
 
-                        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" autocomplete="off">
+                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" autocomplete="off">
                             <div class="my-3">
                                 <label for="">Name</label>
                                 <input class="form-control" name="name" type="text">
@@ -152,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             </div>
                             <div class="my-3">
                                 <label for="">Photo</label>
-                                <input type="file" class="form-control" name="user_photo">
+                                <input type="file" class="form-control" name="photo">
                             </div>
                             <div class="my-3">
                                 <input type="submit" name="submit" value="create" class="btn btn-primary">

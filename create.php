@@ -99,20 +99,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" autocomplete="off">
                             <div class="my-3">
                                 <label for="">Name</label>
-                                <input class="form-control" name="name" type="text">
+                                <input type="text" name="name" value="<?php echo old('name') ?>" placeholder="Type your Name" class="form-control">
                             </div>
                             <div class="my-3">
                                 <label for="">Email</label>
-                                <input class="form-control" name="email" type="text">
+                                <input type="text" name="email" value="<?php echo old('email') ?>" placeholder="Type your Email" class="form-control">
                             </div>
                             <div class="my-3">
                                 <label for="">Phone</label>
-                                <input class="form-control" name="phone" type="text">
+                                <input type="text" name="phone" value="<?php echo old('phone') ?>" placeholder="Type your Phone" class="form-control">
                             </div>
-                            <div class="my-3">
+                            <div class=" my-3">
                                 <label for="">Skill</label>
-                                <select class="form-control" name="skill" type="text">
-                                    <option value="">--Select Skill--</option>
+                                <select type="text" name="skill" class="form-control">
+                                    <option value="" class="d-none">Select your Skill</option>
                                     <option value="Wordpress Developer">Wordpress Developer</option>
                                     <option value="Laravel Developer">Laravel Developer</option>
                                     <option value="React js Developer">React Js Developer</option>
@@ -122,8 +122,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
                             <div class="my-3">
                                 <label for="">Location</label>
-                                <select class="form-control" name="location" type="text">
-                                    <option value="">--Select Location--</option>
+                                <select type="text" name="location" class="form-control">
+                                    <option value="" class="d-none">Select your Location</option>
                                     <option value="Dhaka">Dhaka</option>
                                     <option value="Barishal">Barishal</option>
                                     <option value="Rajshahi">Rajshahi</option>
@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
                             <div class="my-3">
                                 <label for="">Age</label>
-                                <input class="form-control" name="age" type="text">
+                                <input type="number" name="age" value="<?php echo old('age') ?>" placeholder="Your Age" class="form-control">
                             </div>
 
                             <div class="my-3">
@@ -152,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             </div>
                             <div class="my-3">
                                 <label for="">Photo</label>
-                                <input type="file" class="form-control" name="photo">
+                                <input type="file" class="form-control" value="<?php echo old('photo') ?>" name="photo">
                             </div>
                             <div class="my-3">
                                 <input type="submit" name="submit" value="create" class="btn btn-primary">
